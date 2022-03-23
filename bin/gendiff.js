@@ -13,4 +13,3 @@ program
     genDiff(filepath1, filepath2);
   });
 program.parse();
-
