@@ -7,11 +7,11 @@ import genDiff from '../src/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
-const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
-const result = readFile('../__fixtures__/outputjson.txt');
+const readFile = (filename) => getFixturePath(filename);
+const result = readFileSync(readFile('../__fixtures__/outputjson.txt'), 'utf-8');
 const a = result.trim();
-const x = '/home/xehlet/backend-project-lvl2/__fixtures__/file1.json';
-const y = '/home/xehlet/backend-project-lvl2/__fixtures__/file2.json';
+const x = readFile('../__fixtures__/file1.json');
+const y = readFile('../__fixtures__/file2.json');
 test('genDiff', () => {
   expect(genDiff(x, y)).toEqual(a);
 });
