@@ -2,7 +2,7 @@ import { dirname, resolve } from 'path';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { test, expect } from '@jest/globals';
-import genDiff from '../src/index.js';
+import gendiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,6 +12,6 @@ const result = readFileSync(readFile('../__fixtures__/outputyml.txt'), 'utf-8');
 const a = result.trim();
 const x = readFile('../__fixtures__/file1.yml');
 const y = readFile('../__fixtures__/file2.yml');
-test('genDiff', () => {
-  expect(genDiff(x, y)).toEqual(a);
+test('gendiff', () => {
+  expect(gendiff(x, y)).toEqual(a);
 });

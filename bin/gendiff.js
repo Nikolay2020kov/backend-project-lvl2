@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander/esm.mjs';
-import genDiff from '../src/index.js';
+import gendiff from '../src/index.js';
 
 const program = new Command();
 
@@ -10,6 +10,6 @@ program
   .option('-f, --format <type>', 'output format','stylish')
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2, option) => {
-    genDiff(filepath1, filepath2, option.format);
+    gendiff(filepath1, filepath2, option.format);
   });
 program.parse();
