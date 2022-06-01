@@ -1,21 +1,21 @@
 {
     common: {
+      + follow: false
         setting1: Value 1
       - setting2: 200
       + setting3: null
       - setting3: true
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
         setting6: {
-            key: value
             doge: {
               + wow: so much
               - wow: 
             }
+            key: value
           + ops: vops
-        }
-      + follow: false
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
         }
     }
     group1: {
