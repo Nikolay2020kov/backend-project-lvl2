@@ -23,7 +23,7 @@ const ast = (data1, data2) => {
     if (_.has(data1, key) === false && _.has(data2, key) === true) {
       return { type: 'added', key, value: data2[key] };
     }
-    return 0;
+    return 'Error - Wrong key!';
   }).sort((a, b) => {
     if (a.key > b.key) {
       return 1;

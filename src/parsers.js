@@ -14,6 +14,6 @@ const parses = (filename) => {
   if (path.extname(filename) === '.yaml') {
     return load(readFile(filename));
   }
-  return 0;
+  return '0';
 };
 export default parses;

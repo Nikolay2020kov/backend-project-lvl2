@@ -17,20 +17,6 @@ const formatKey = (parentKey, key) => {
 };
 
 const plain = (diff) => {
-/*
-console.log(diff);
- diff = diff.sort(function (a, b) {
-  if (a.key > b.key) {
-    return 1;
-  }
-  if (a.key < b.key) {
-    return -1;
-  }
-  // a должно быть равным b
-  return 0;
- });
-console.log(diff); */
-
   const result = diff.map((item) => {
     const iter = (iterItem, startKey = '') => {
       const {
