@@ -3,7 +3,7 @@ import _ from 'lodash';
 const ast = (data1, data2) => {
   const mass = { ...data1, ...data2 };
   const keys = Object.keys(mass);
-  return keys.map((key) => {
+  return _.sortBy(keys).map((key) => {
     if (_.isPlainObject(data1[key]) === true && _.isPlainObject(data2[key]) === true) {
       return { type: 'tree', key, children: ast(data1[key], data2[key]) };
     }
@@ -24,14 +24,6 @@ const ast = (data1, data2) => {
       return { type: 'added', key, value: data2[key] };
     }
     return 'Error - Wrong key!';
-  }).sort((a, b) => {
-    if (a.key > b.key) {
-      return 1;
-    }
-    if (a.key < b.key) {
-      return -1;
-    }
-    return 0;
   });
 };
 export default ast;

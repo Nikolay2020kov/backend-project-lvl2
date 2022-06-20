@@ -1,52 +1,54 @@
 import _ from 'lodash';
 
+const OpenSign = '{';
+const CloseSign = '}';
 const tab = '  ';
-const openingBracket = '{';
-const closingBracket = '}';
-const deepShiftItem = 2;
+const repeatTab = 2;
 
-const formatItem = (key, tabulation, sign = ' ') => `${tabulation}${sign} ${key}`;
+const indent = (key, tabulation, sign = ' ') => `${tabulation}${sign} ${key}`;
 
-const valueVerification = (value, tabulation) => {
+const proverka = (value, tabulation) => {
   if (!_.isObject(value)) {
     return value;
   }
-  const newTab = formatItem(tab, tabulation);
-  const collPairs = _.toPairs(value);
-  const newX = collPairs.flatMap(([key, innerValue]) => {
+  const newTab = indent(tab, tabulation);
+  const Pairs = _.toPairs(value);
+  const newValue = Pairs.flatMap(([key, innerValue]) => {
     if (_.isObject(innerValue)) {
-      return `${formatItem(key, newTab)}: ${valueVerification(innerValue, newTab)}`;
+      return `${indent(key, newTab)}: ${proverka(innerValue, newTab)}`;
     }
-    return `${formatItem(key, newTab)}: ${innerValue}`;
+    return `${indent(key, newTab)}: ${innerValue}`;
   });
-  return [openingBracket, `${newX.join('\n')}`, `${formatItem(closingBracket, tabulation)}`].join('\n');
+  return [OpenSign, `${newValue.join('\n')}`, `${indent(CloseSign, tabulation)}`].join('\n');
 };
 
-const stylish = (coll) => {
-  const iter = (innerColl, depth) => {
+const stylish = (tree) => {
+  const stylish1 = (tree1, depth) => {
     const newTab = tab.repeat(depth);
-    const result = innerColl.flatMap((obj) => {
+    const maps = tree.map((obj) => {
       const {
-        key, value, OldValue, NewValue, type, children,
+        key, value, OldValue, NewValue, children, type,
       } = obj;
-      switch (type) {
-        case 'added':
-          return `${formatItem(key, newTab, '+')}: ${valueVerification(value, newTab)}`;
-        case 'deleted':
-          return `${formatItem(key, newTab, '-')}: ${valueVerification(value, newTab)}`;
-        case 'change':
-          return [`${formatItem(key, newTab, '+')}: ${valueVerification(NewValue, newTab)}`,
-            `${formatItem(key, newTab, '-')}: ${valueVerification(OldValue, newTab)}`];
-        case 'equal':
-          return `${formatItem(key, newTab)}: ${valueVerification(value, newTab)}`;
-        case 'tree':
-          return `${formatItem(key, newTab)}: ${openingBracket}\n${iter(children, depth + deepShiftItem)}\n${formatItem(closingBracket, newTab)}`;
-        default:
-          throw new Error(`Wrong type ${type}`);
+      if (type === 'added') {
+        return `${indent(key, newTab, '+')}: ${proverka(value, newTab)}`;
       }
+      if (type === 'deleted') {
+        return `${indent(key, newTab, '-')}: ${proverka(value, newTab)}`;
+      }
+      if (type === 'change') {
+        return `${indent(key, newTab, '-')}: ${proverka(OldValue, newTab)} \n${indent(key, newTab, '+')}: ${proverka(NewValue, newTab)}`;
+      }
+      if (type === 'equal') {
+        return `${indent(key, newTab)}: ${proverka(value, newTab)}`;
+      }
+      if (type === 'tree') {
+        return `${indent(key, newTab)}: ${OpenSign}\n${stylish1(children, depth + repeatTab)}\n${indent(CloseSign, newTab)}`;
+      }
+      return 0;
     });
-    return result.join('\n');
+    return maps.join('\n');
   };
-  return [openingBracket, iter(coll, 1), closingBracket].join('\n');
+  return [OpenSign, stylish1(tree, 1), CloseSign].join('\n');
 };
+
 export default stylish;
