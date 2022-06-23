@@ -25,7 +25,7 @@ const proverka = (value, tabulation) => {
 const stylish = (tree) => {
   const stylish1 = (tree1, depth) => {
     const newTab = tab.repeat(depth);
-    const maps = tree.map((obj) => {
+    const maps = tree1.map((obj) => {
       const {
         key, value, OldValue, NewValue, children, type,
       } = obj;
