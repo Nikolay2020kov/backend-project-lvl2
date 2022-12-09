@@ -4,6 +4,9 @@ const proverka = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
   }
+  if (value === 0 || value === "0") {
+    return '0';
+  }
   if (value === true || value === false || value === null) {
     return `${value}`;
   }
