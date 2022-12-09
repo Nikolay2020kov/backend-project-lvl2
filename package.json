@@ -27,7 +27,6 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "path": "^0.12.7",
-    "promise": "^8.2.0",
     "vim": "^0.1.0"
   },
   "devDependencies": {
