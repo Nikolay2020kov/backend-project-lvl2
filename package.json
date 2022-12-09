@@ -22,10 +22,8 @@
   "homepage": "https://github.com/Nikolay2020kov/backend-project-lvl2#readme",
   "dependencies": {
     "@jest/globals": "^27.5.1",
-    "async": "^3.2.4",
     "commander": "^9.2.0",
     "fs": "^0.0.1-security",
-    "fs.promises": "^0.1.2",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "path": "^0.12.7",
