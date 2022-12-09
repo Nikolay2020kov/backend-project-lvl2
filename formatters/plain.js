@@ -19,8 +19,6 @@ const proverka = (value) => {
   return `'${value}'`;
 };
 
-let k;
-
 const plain = (diff, a = '') => {
   const maps = diff.map((obj) => {
     const {
@@ -39,8 +37,7 @@ const plain = (diff, a = '') => {
       return null;
     }
     if (type === 'tree') {
-      k = `${a + key}.`;
-      return plain(children, k);
+      return plain(children, `${a + key}.`);
     }
     return 0;
   }).filter((f) => f !== null);
