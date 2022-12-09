@@ -36,7 +36,7 @@ const stylish = (tree) => {
         return `${indent(key, newTab, '-')}: ${proverka(value, newTab)}`;
       }
       if (type === 'change') {
-        return `${indent(key, newTab, '-')}: ${proverka(OldValue, newTab)} \n${indent(key, newTab, '+')}: ${proverka(NewValue, newTab)}`;
+        return `${indent(key, newTab, '-')}: ${proverka(OldValue, newTab)}\n${indent(key, newTab, '+')}: ${proverka(NewValue, newTab)}`;
       }
       if (type === 'equal') {
         return `${indent(key, newTab)}: ${proverka(value, newTab)}`;
